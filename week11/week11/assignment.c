@@ -1,21 +1,31 @@
 ﻿#include <stdio.h>
-#include <string.h>
 
-void swap(int* a, int* b) {
-	int temp;
+void apply_discount(int* price, int n, int percent) {
+	for (int i = 0; i < n; i++) {
+		*(price + i) = *(price + i) * (100 - percent) / 100;
+	}
+}
 
-	temp = *a;
-	*a = *b;
-	*b = temp;
+void print_prices(int* price, int n) {
+	for (int i = 0; i < n; i++) {
+		printf("%d ", *(price + i));
+	}
+	printf("\n");
 }
 
 int main(void) {
+	int prices[5] = { 12000, 8500, 3000, 45000, 990 };
+	int percent;
+
+	printf("할인율(%%)을 입력하시오 : ");
+	scanf_s("%d", &percent);
 	
-	int num1 = 45510;
-	int num2 = 2023;
+	printf("할인 전 : ");
+	print_prices(prices, 5);
 
-	swap(&num1, &num2);
+	apply_discount(prices, 5, percent);
 
-	printf("num1 value : %d\n", num1);
-	printf("num2 value : %d\n", num2);
+	printf("할인 후 : ");
+	print_prices(prices, 5);
+
 }
